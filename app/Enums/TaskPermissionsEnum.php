@@ -10,7 +10,6 @@ enum TaskPermissionsEnum: string
 
     case READ_TASKS = 'read-tasks';
     case CREATE_TASKS = 'create-tasks';
-    case EDIT_TASKS = 'edit-tasks';
     case UPDATE_TASKS = 'update-tasks';
     case DELETE_TASKS = 'delete-tasks';
 }

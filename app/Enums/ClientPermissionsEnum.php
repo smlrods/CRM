@@ -10,7 +10,6 @@ enum ClientPermissionsEnum: string
 
     case READ_CLIENTS = 'read-clients';
     case CREATE_CLIENTS = 'create-clients';
-    case EDIT_CLIENTS = 'edit-clients';
     case UPDATE_CLIENTS = 'update-clients';
     case DELETE_CLIENTS = 'delete-clients';
 }
