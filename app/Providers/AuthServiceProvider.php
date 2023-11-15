@@ -7,9 +7,11 @@ namespace App\Providers;
 use App\Models\Address;
 use App\Models\Client;
 use App\Models\Project;
+use App\Models\Task;
 use App\Policies\AddressPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ProjectPolicy;
+use App\Policies\TaskPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Project::class => ProjectPolicy::class,
         Client::class => ClientPolicy::class,
         Address::class => AddressPolicy::class,
+        Task::class => TaskPolicy::class,
     ];
 
     /**
