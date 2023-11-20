@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('company');
             $table->integer('vat');
-            $table->integer('address');
+            $table->integer('address_id');
         });
     }
 
