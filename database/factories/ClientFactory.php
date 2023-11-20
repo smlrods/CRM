@@ -20,7 +20,7 @@ class ClientFactory extends Factory
         return [
             'company' => fake()->company(),
             'vat' => fake()->unique()->numberBetween(1000, 99999),
-            'address' => Address::factory(),
+            'address_id' => Address::factory(),
         ];
     }
 }
