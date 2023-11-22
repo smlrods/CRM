@@ -15,10 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory()
-            ->count(10)
-            ->has(Project::factory()->count(3)->hasTasks(3))
-            ->create();
+        if (app()->isLocal()) {
+            User::factory()
+                ->count(10)
+                ->has(Project::factory()->count(3)->hasTasks(3))
+                ->create();
+        }
 
         User::factory()->create([
             'name' => 'admin',
