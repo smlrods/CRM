@@ -7,6 +7,7 @@ use App\Enums\ClientPermissionsEnum;
 use App\Enums\ProjectPermissionsEnum;
 use App\Enums\RolesEnum;
 use App\Enums\TaskPermissionsEnum;
+use App\Enums\UserPermissionsEnum;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -36,6 +37,10 @@ class RolesAndPermissionsSeeder extends Seeder
         }
 
         foreach (TaskPermissionsEnum::toArray() as $permission) {
+            app(Permission::class)->findOrCreate($permission, 'web');
+        }
+
+        foreach (UserPermissionsEnum::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
