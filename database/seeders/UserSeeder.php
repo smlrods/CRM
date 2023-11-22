@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -22,10 +23,11 @@ class UserSeeder extends Seeder
                 ->create();
         }
 
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@email.com',
-            'password' => '12345678',
+        User::create([
+            'name' => env('ADMIN_NAME', 'admin'),
+            'email' => env('ADMIN_EMAIL', 'admin@email.com'),
+            'password' => env('ADMIN_PASSWORD', '123'),
+            'email_verified_at' => now(),
         ])->assignRole(RolesEnum::ADMINISTRATOR);
     }
 }
