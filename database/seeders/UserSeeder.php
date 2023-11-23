@@ -17,10 +17,12 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         if (app()->isLocal()) {
-            User::factory()
+            $users = User::factory()
                 ->count(10)
                 ->has(Project::factory()->count(3)->hasTasks(3))
                 ->create();
+
+            $users->each(fn(User $user) => $user->assignRole(fake()->randomElement(RolesEnum::toArray())));
         }
 
         User::create([
