@@ -10,10 +10,13 @@ class UserPolicy
 {
     /**
      * Determine whether the user can view any models.
+     * @param \App\Models\User|null $User
+     * @param \App\Post $post
+     * @return bool
      */
     public function viewAny(User $user): bool
     {
-        return $user->can(UserPermissionsEnum::READ_USERS);
+        return $user->can(UserPermissionsEnum::READ_USERS->value);
     }
 
     /**
@@ -21,7 +24,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->can(UserPermissionsEnum::READ_USERS);
+        return $user->can(UserPermissionsEnum::READ_USERS->value);
     }
 
     /**
@@ -29,7 +32,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can(UserPermissionsEnum::CREATE_USERS);
+        return $user->can(UserPermissionsEnum::CREATE_USERS->value);
     }
 
     /**
@@ -38,7 +41,7 @@ class UserPolicy
     public function update(User $user, User $model): bool
     {
         //
-        return $user->can(UserPermissionsEnum::UPDATE_USERS);
+        return $user->can(UserPermissionsEnum::UPDATE_USERS->value);
     }
 
     /**
@@ -46,7 +49,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can(UserPermissionsEnum::DELETE_USERS);
+        return $user->can(UserPermissionsEnum::DELETE_USERS->value);
     }
 
     /**
