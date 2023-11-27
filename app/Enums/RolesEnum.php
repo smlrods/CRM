@@ -8,6 +8,7 @@ enum RolesEnum: string
 {
     use ToArrayEnum;
 
+    case SUPER = 'super administrator';
     case ADMINISTRATOR = 'administrator';
     case SALES = 'sales-representative';
     case SUPPORT = 'customer-support';
@@ -17,6 +18,7 @@ enum RolesEnum: string
     public function label(): string
     {
         return match ($this) {
+            static::SUPER => 'Super Administrators',
             static::ADMINISTRATOR => 'Administrators',
             static::SALES => 'Sales Representatives',
             static::SUPPORT => 'Customer Supports',
