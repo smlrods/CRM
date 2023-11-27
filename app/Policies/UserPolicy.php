@@ -41,7 +41,10 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        //
+        if ($model->hasAnyRole([RolesEnum::ADMINISTRATOR, RolesEnum::SUPER])) {
+            return false;
+        }
+
         return $user->can(UserPermissionsEnum::UPDATE_USERS->value);
     }
 
