@@ -30,6 +30,6 @@ class UserSeeder extends Seeder
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', '123'),
             'email_verified_at' => now(),
-        ])->assignRole(RolesEnum::ADMINISTRATOR);
+        ])->assignRole(RolesEnum::SUPER);
     }
 }
