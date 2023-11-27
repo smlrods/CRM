@@ -50,6 +50,14 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
+        if ($model->hasRole(RolesEnum::SUPER)) {
+            return false;
+        }
+
+        if ($model->hasRole(RolesEnum::ADMINISTRATOR)) {
+            return $user->can(UserPermissionsEnum::DELETE_ADMINISTRATORS->value);
+        }
+
         return $user->can(UserPermissionsEnum::DELETE_USERS->value);
     }
 
