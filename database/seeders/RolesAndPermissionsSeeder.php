@@ -46,8 +46,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // create roles and assign created permissions
 
+        $superAdministrator = app(Role::class)->findOrCreate(RolesEnum::SUPER->value, 'web');
+        $superAdministrator->givePermissionTo(Permission::all());
+
         $administrator = app(Role::class)->findOrCreate(RolesEnum::ADMINISTRATOR->value, 'web');
         $administrator->givePermissionTo(Permission::all());
+        $administrator->revokePermissionTo(UserPermissionsEnum::DELETE_ADMINISTRATORS);
 
         $salesRepresentative = app(Role::class)->findOrCreate(RolesEnum::SALES->value, 'web');
         $salesRepresentative->givePermissionTo(ProjectPermissionsEnum::toArray());
