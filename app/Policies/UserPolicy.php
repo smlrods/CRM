@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\RolesEnum;
 use App\Enums\UserPermissionsEnum;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -66,5 +67,17 @@ class UserPolicy
     public function forceDelete(User $user, User $model): bool
     {
         return false;
+    }
+
+    /**
+     * Perform pre-authorization checks on the model
+     */
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->hasRole(RolesEnum::SUPER->value)) {
+            return true;
+        }
+
+        return null;
     }
 }
