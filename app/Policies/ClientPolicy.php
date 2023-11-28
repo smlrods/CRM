@@ -14,7 +14,7 @@ class ClientPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can(ClientPermissionsEnum::READ_CLIENTS);
+        return $user->can(ClientPermissionsEnum::READ_CLIENTS->value);
     }
 
     /**
@@ -22,7 +22,7 @@ class ClientPolicy
      */
     public function view(User $user, Client $client): bool
     {
-        return $user->can(ClientPermissionsEnum::READ_CLIENTS);
+        return $user->can(ClientPermissionsEnum::READ_CLIENTS->value);
     }
 
     /**
@@ -30,7 +30,7 @@ class ClientPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can(ClientPermissionsEnum::CREATE_CLIENTS);
+        return $user->can(ClientPermissionsEnum::CREATE_CLIENTS->value);
     }
 
     /**
@@ -38,7 +38,7 @@ class ClientPolicy
      */
     public function update(User $user, Client $client): bool
     {
-        return $user->can(ClientPermissionsEnum::UPDATE_CLIENTS);
+        return $user->can(ClientPermissionsEnum::UPDATE_CLIENTS->value);
     }
 
     /**
@@ -46,7 +46,7 @@ class ClientPolicy
      */
     public function delete(User $user, Client $client): bool
     {
-        return $user->can(ClientPermissionsEnum::DELETE_CLIENTS);
+        return $user->can(ClientPermissionsEnum::DELETE_CLIENTS->value);
     }
 
     /**
