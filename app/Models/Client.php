@@ -12,7 +12,7 @@ class Client extends Model
 {
     use HasFactory, Searchable;
 
-    protected $fillable = ['company', 'vat', 'address'];
+    protected $fillable = ['company', 'vat', 'address_id'];
 
     public $timestamps = false;
 
