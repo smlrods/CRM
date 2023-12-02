@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     public $timestamps = false;
 
@@ -28,5 +29,13 @@ class Project extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description
+        ];
     }
 }

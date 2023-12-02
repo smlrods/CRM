@@ -14,7 +14,7 @@ class ProjectPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can(ProjectPermissionsEnum::READ_PROJECTS);
+        return $user->can(ProjectPermissionsEnum::READ_PROJECTS->value);
     }
 
     /**
@@ -22,7 +22,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project): bool
     {
-        return $user->can(ProjectPermissionsEnum::READ_PROJECTS);
+        return $user->can(ProjectPermissionsEnum::READ_PROJECTS->value);
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can(ProjectPermissionsEnum::CREATE_PROJECTS);
+        return $user->can(ProjectPermissionsEnum::CREATE_PROJECTS->value);
     }
 
     /**
@@ -38,7 +38,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        return $user->can(ProjectPermissionsEnum::UPDATE_PROJECTS);
+        return $user->can(ProjectPermissionsEnum::UPDATE_PROJECTS->value);
     }
 
     /**
@@ -46,7 +46,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project): bool
     {
-        return $user->can(ProjectPermissionsEnum::DELETE_PROJECTS);
+        return $user->can(ProjectPermissionsEnum::DELETE_PROJECTS->value);
     }
 
     /**
