@@ -73,6 +73,7 @@ jobs:
           php -r "file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');"
           php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
+          php artisan key:generate --env=testing
 
       - name: Clear Config
         run: php artisan config:clear
