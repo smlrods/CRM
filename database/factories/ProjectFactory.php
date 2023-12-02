@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
         return [
             'title' => fake()->word(),
             'description' => fake()->text(),
-            'deadline' => fake()->dateTimeBetween('now', '+30 days'),
+            'deadline' => fake()->dateTimeBetween('now', '+30 days')->format('Y-m-d'),
             'client_id' => Client::factory(),
             'status' => fake()->randomElement([
                 "In Process",
