@@ -82,6 +82,9 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
+      - name: Build assets
+        run: npm run build
+        
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text
         env:
