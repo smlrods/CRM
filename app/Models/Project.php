@@ -30,4 +30,12 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description
+        ];
+    }
 }
