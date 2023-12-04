@@ -19,7 +19,7 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->word(),
             'description' => fake()->text(),
-            'due_date' => fake()->dateTimeBetween('+1 day', '+1 week'),
+            'due_date' => fake()->dateTimeBetween('+1 day', '+1 week')->format('Y-m-d'),
             'status' => fake()->randomElement([
                 "Not Started",
                 "In Progress",
