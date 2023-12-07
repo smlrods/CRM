@@ -5,6 +5,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Models\Client;
+use App\Models\Project;
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +25,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    $userData = User::getCountChartDataForWeek();
+    $clientData = Client::getCountChartDataForWeek();
+    $projectData = Project::getCountChartData();
+    $taskData = Task::getCountChartData();
+
+    return view('dashboard', [
+        'userChartData' => $userData,
+        'clientChartData' => $clientData,
+        'projectChartData' => $projectData,
+        'taskChartData' => $taskData,
+    ]);
 })->middleware(['auth', 'verified']);
 
 Route::resource('users', UserController::class)->middleware(['auth', 'verified']);

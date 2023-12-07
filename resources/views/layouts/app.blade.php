@@ -14,6 +14,8 @@
 
     <!-- Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @stack('scripts')
 </head>
 
 <body class="antialiased relative">
