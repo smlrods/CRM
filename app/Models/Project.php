@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DonutChartDataGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Laravel\Scout\Searchable;
 
 class Project extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, DonutChartDataGenerator;
 
     public $timestamps = false;
 
