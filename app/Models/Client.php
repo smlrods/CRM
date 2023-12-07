@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\BarChartDataGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,11 +11,9 @@ use Laravel\Scout\Searchable;
 
 class Client extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, BarChartDataGenerator;
 
     protected $fillable = ['company', 'vat', 'address_id'];
-
-    public $timestamps = false;
 
     public function projects(): HasMany
     {
