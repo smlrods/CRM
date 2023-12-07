@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DonutChartDataGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class Task extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, DonutChartDataGenerator;
 
     protected $fillable = ['title', 'description', 'due_date', 'status', 'project_id'];
 
