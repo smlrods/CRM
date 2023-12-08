@@ -2,7 +2,7 @@
 
 @section('content')
     @parent
-    <div class="sm:ml-64 mt-14 p-4">
+    <div class="sm:ml-64 mt-14 p-4 w-max mx-auto">
         <div class="grid 2xl:grid-cols-4 lg:grid-cols-2 w-fit gap-5">
             <x-dashboard.charts.bar :data="$userChartData" :resourceName="'users'" />
             <x-dashboard.charts.bar :data="$clientChartData" :resourceName="'clients'" />
