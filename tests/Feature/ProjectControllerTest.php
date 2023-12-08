@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\RolesEnum;
 use App\Models\Client;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -131,5 +132,20 @@ class ProjectControllerTest extends TestCase
 
         $response->assertRedirect(route('projects.index'));
         $this->assertModelMissing($project);
+    }
+
+    public function test_delete_project_deletes_all_tasks()
+    {
+        $user = User::factory()->create()->assignRole(RolesEnum::ADMINISTRATOR);
+        $project = Project::factory()->create(['user_id' => $user->id]);
+        $task1 = Task::factory()->create(['project_id' => $project->id]);
+        $task2 = Task::factory()->create(['project_id' => $project->id]);
+
+        $response = $this->actingAs($user)->delete(route('projects.destroy', $project));
+
+        $response->assertRedirect(route('projects.index'));
+        $this->assertModelMissing($project);
+        $this->assertModelMissing($task1);
+        $this->assertModelMissing($task2);
     }
 }
