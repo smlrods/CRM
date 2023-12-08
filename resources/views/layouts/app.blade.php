@@ -18,7 +18,7 @@
     @stack('scripts')
 </head>
 
-<body class="antialiased relative">
+<body class="antialiased relative bg-gray-50">
     <x-navbar />
     <x-sidebar />
     @section('content')
