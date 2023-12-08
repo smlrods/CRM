@@ -1,5 +1,10 @@
 <div class="p-4 sm:ml-64">
     <div class="relative overflow-x-auto sm:rounded-lg mt-14">
+        @if(session('error'))
+            <div class="alert alert-danger">
+                <x-delete-alert :message="session('error')" />
+            </div>
+        @endif
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <div>
                 <a href="/{{ $resourceName }}/create">
