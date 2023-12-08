@@ -14,8 +14,6 @@
                     </svg>
                 </button>
                 <a href="/" class="flex ms-2 md:me-24">
-                    <img src="https://e7.pngegg.com/pngimages/659/894/png-clipart-yui-hirasawa-k-on-mio-akiyama-anime-kavaii-anime-girl-child-face.png"
-                        class="h-8 me-3" alt="FlowBite Logo" />
                     <span
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">CRM</span>
                 </a>
@@ -27,9 +25,7 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://wallpapers.com/images/hd/cool-anime-girl-pfp-sajuna-inui-dgg3rwh8q6po13o6.jpg"
-                                alt="user photo">
+                                <svg class="bg-white" xmlns="http://www.w3.org/2000/svg" fill="#4b5563" viewBox="0 0 16 16" width="32" height="32"><path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"></path></svg>
                         </button>
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
