@@ -15,11 +15,11 @@ var options = {
     {
         name: "Total Clients",
         color: "#1d4ed8",
-        data: getTotalUsers(dataUsers),
+        data: getTotalUsers(dataClients),
     },
     {
         name: "New Clients",
-        data: getTotalNewUsers(dataUsers),
+        data: getTotalNewUsers(dataClients),
         color: "#10b981",
     }
     ],
