@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('deadline');
             $table->integer('user_id');
-            $table->integer('client_id');
+            $table->foreignId('client_id')->constrained();
             $table->enum('status', ['in process', 'completed', 'on hold', 'cancelled', 'pending approval']);
         });
     }
