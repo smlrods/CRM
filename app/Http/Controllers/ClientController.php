@@ -122,9 +122,13 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        // Check for constraints before deleting the client
+        if ($client->projects()->exists()) {
+            return redirect('/clients')->with('error', 'Unable to delete the client as there are associated projects. Please delete the projects linked to this client before proceeding with the client deletion.');
+        }
 
         $client->address->delete();
+        $client->delete();
 
         return redirect('/clients');
     }
