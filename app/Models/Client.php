@@ -24,15 +24,4 @@ class Client extends Model
     {
         return $this->belongsTo(Address::class);
     }
-
-    public function toArray()
-    {
-        $address = $this->address;
-
-        return [
-            'company' => $this->company,
-            'vat' => $this->vat,
-            'address' => $address->street_address . ', ' . $address->city . ', ' . $address->state . ' ' . $address->zip_code,
-        ];
-    }
 }
