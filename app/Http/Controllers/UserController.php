@@ -110,6 +110,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // Check for constraints before deleting the user
+        if ($user->projects()->exists()) {
+            return redirect('/users')->with('error', 'Unable to delete the user as there are associated projects. Please delete the projects linked to this user before proceeding with the user deletion.');
+        }
+
         $user->delete();
 
         return redirect('/users');
