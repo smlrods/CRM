@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     $userData = User::getCountChartDataForWeek();
     $clientData = Client::getCountChartDataForWeek();
     $projectData = Project::getCountChartData();
