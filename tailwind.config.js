@@ -7,9 +7,10 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         "./resources/**/*.blade.php",
-        "./resources/**/*.js",
+        "./resources/**/*.{js,jsx,ts,tsx}",
         "./resources/**/*.vue",
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
+        'node_modules/flowbite-react/lib/esm/**/*.js',
     ],
 
     theme: {
