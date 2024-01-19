@@ -42,6 +42,20 @@ class OrganizationController extends Controller
             'user_id' => auth()->id(),
         ]));
 
+        // create a role for the owner
+        Role::create([
+            'name' => 'owner',
+            'guard_name' => 'web',
+            'organization_id' => $organization->id,
+        ]);
+
+        setPermissionsTeamId($organization->id);
+
+        // assign the owner role to the owner
+        $organization->user->syncRoles([$organization->roles->first()->name]);
+        // $member->user->syncRoles($role->name);
+
+
         return to_route('organizations.index')->with(['message' => 'Organization created successfully!', 'type' => 'success']);
     }
 
