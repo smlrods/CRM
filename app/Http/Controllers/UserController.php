@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class UserController extends Controller
 {
@@ -118,5 +119,25 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/users');
+    }
+
+    /**
+     * Set the organization for the user.
+     */
+    public function setOrganization(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'organization_id' => ['required', 'exists:organizations,id'],
+        ]);
+
+        $organizationId = $request->input('organization_id');
+
+        if (auth()->user()->memberships->contains('organization_id', $organizationId)) {
+            session(['organization_id' => $organizationId]);
+            setPermissionsTeamId($organizationId);
+            return redirect()->route('dashboard');
+        }
+
+        return abort(403, 'You are not authorized to access this organization.');
     }
 }
