@@ -98,4 +98,28 @@ class RoleController extends Controller
 
         return redirect()->back()->with(['message' => 'Role created successfully.', 'type' => 'success']);
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Role $role)
+    {
+        $validated = $request->validate([
+            'name' => [Rule::excludeIf($request->input('name') === $role->name), 'required', 'string', 'max:255', 'unique:roles'],
+            'permissions' => ['required', 'array'],
+            'permissions.*' => Rule::in(Permission::get()->pluck('id'))
+        ]);
+
+        $permissions = Permission::whereIn('id', $validated['permissions'])->get();
+
+        if (array_key_exists('name', $validated)) {
+            $role->update([
+                'name' => ucfirst($validated['name']),
+            ]);
+        }
+
+        $role->syncPermissions($permissions);
+
+        return to_route('roles.index')->with(['message' => 'Role updated successfully.', 'type' => 'success']);
+    }
 }
