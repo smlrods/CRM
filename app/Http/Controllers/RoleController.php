@@ -122,4 +122,14 @@ class RoleController extends Controller
 
         return to_route('roles.index')->with(['message' => 'Role updated successfully.', 'type' => 'success']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Role $role)
+    {
+        $role->delete();
+
+        return back()->with(['message' => 'Role deleted successfully.', 'type' => 'success']);
+    }
 }
