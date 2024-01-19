@@ -132,7 +132,7 @@ Please refer to the `package.json` file for a full list of JavaScript and Node.j
 
 ## Database Schema
 
-![Database Schema](./assets/db-schema.svg)
+[![Database Schema](./assets/db-schema.svg)](https://dbdiagram.io/d/NEW-CRM-6577200d56d8064ca0cd099a)
 
 ## **MVC Pattern**
 
