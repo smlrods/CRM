@@ -28,21 +28,32 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
+Route::middleware(['auth', 'verified', 'check_organitation'])->group(function () {
 Route::get('/dashboard', function () {
-    $userData = User::getCountChartDataForWeek();
-    $clientData = Client::getCountChartDataForWeek();
-    $projectData = Project::getCountChartData();
-    $taskData = Task::getCountChartData();
+        $organizations = auth()->user()->memberships()->with('organization')->get();
 
-    return view('dashboard', [
-        'userChartData' => $userData,
-        'clientChartData' => $clientData,
-        'projectChartData' => $projectData,
-        'taskChartData' => $taskData,
-    ]);
-})->middleware(['auth', 'verified']);
+        return Inertia::render('Dashboard', [
+            'organizations' => $organizations,
+        ]);
+    })->name('dashboard');
 
-Route::resource('users', UserController::class)->middleware(['auth', 'verified']);
+    Route::apiResource('organizations', OrganizationController::class)->withoutMiddleware('check_organitation');
+    // Route::apiResource('members', MemberController::class);
+    Route::controller(MemberController::class)->group(function () {
+        Route::get('/', 'index')->name('members.index');
+        Route::put('/{member}', 'update')->name('members.update');
+        Route::delete('/{member}', 'destroy')->name('members.destroy');
+    })->prefix('members');
+
+    // Route::apiResource('invitations', InvitationController::class)->withoutMiddleware('check_organitation');
+    Route::controller(InvitationController::class)->group(function () {
+        Route::post('/invitations', 'store')->name('invitations.store');
+        Route::put('/invitations/{invitation}', 'update')->name('invitations.update');
+    })->withoutMiddleware('check_organitation');
+
+    Route::apiResource('roles', RoleController::class);
+
+});
 
 Route::resource('clients', ClientController::class)->middleware(['auth', 'verified']);
 
