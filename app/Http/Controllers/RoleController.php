@@ -77,4 +77,25 @@ class RoleController extends Controller
             'permissions' => $permissions,
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:roles'],
+            'permissions' => ['required', 'array'],
+            'permissions.*' => Rule::in(Permission::get()->pluck('id'))
+        ]);
+
+        $permissions = Permission::whereIn('id', $validated['permissions'])->get();
+
+        Role::create([
+            'name' => ucfirst($validated['name']),
+            'guard_name' => 'web',
+        ])->syncPermissions($permissions);
+
+        return redirect()->back()->with(['message' => 'Role created successfully.', 'type' => 'success']);
+    }
 }
