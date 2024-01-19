@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\OrganizationMember;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -64,6 +65,9 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
+        $organization->roles->each(function ($role) {
+            $role->delete();
+        });
         $organization->delete();
         session()->forget('organization_id');
     }
