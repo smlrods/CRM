@@ -8,6 +8,6 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    protected $seed = true;
+    protected $seed = false;
 
 }
