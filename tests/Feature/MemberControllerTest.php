@@ -6,6 +6,7 @@ use App\Http\Resources\MemberResource;
 use App\Models\Organization;
 use App\Models\OrganizationInvitation;
 use App\Models\OrganizationMember;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -38,6 +39,8 @@ class MemberControllerTest extends TestCase
         setPermissionsTeamId($organization->id);
 
         $user->assignRole($role->name);
+
+        $this->from(route('members.index'));
 
         // Clear the cached permissions
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
@@ -86,7 +89,7 @@ class MemberControllerTest extends TestCase
         $this->assertDatabaseMissing(OrganizationMember::class, ['id' => $member->id]);
 
         // Assert the response was a redirect back
-        $response->assertRedirect();
+        $response->assertRedirect(route('members.index'));
 
         // Assert the session has the success message
         $response->assertSessionHas('message', 'Member deleted successfully.');
