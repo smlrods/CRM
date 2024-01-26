@@ -26,6 +26,7 @@ class MemberControllerTest extends TestCase
         $user = User::factory()->create();
         $organization = Organization::create(['name' => $this->faker->unique()->company, 'user_id' => $user->id, 'created_at' => now()]);
         $organization->memberships()->create(['user_id' => $user->id]);
+        $role = Role::create(['name' => 'owner', 'organization_id' => $organization->id]);
 
         // Set the user as the logged in user
         $this->actingAs($user);
@@ -35,6 +36,8 @@ class MemberControllerTest extends TestCase
 
         // Set the organization as the current team
         setPermissionsTeamId($organization->id);
+
+        $user->assignRole($role->name);
 
         // Clear the cached permissions
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
