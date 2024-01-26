@@ -26,6 +26,7 @@ class RoleControllerTest extends TestCase
         $user = User::factory()->create();
         $organization = Organization::create(['name' => $this->faker->unique()->company, 'user_id' => $user->id, 'created_at' => now()]);
         $organization->memberships()->create(['user_id' => $user->id]);
+        $role = Role::create(['name' => 'owner', 'organization_id' => $organization->id]);
 
         // Set the user as the logged in user
         $this->actingAs($user);
@@ -35,6 +36,11 @@ class RoleControllerTest extends TestCase
 
         // Set the organization as the current team
         setPermissionsTeamId($organization->id);
+
+        // Set the previous URL
+        $this->from(route('roles.index'));
+
+        $user->assignRole($role->name);
 
         // Clear the cached permissions
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
@@ -53,7 +59,7 @@ class RoleControllerTest extends TestCase
 
         // Assert the fetched roles match the created roles
         $response->assertInertia(fn($page) => $page->component('Roles')
-            ->has('pagination.data', 3));
+            ->has('pagination.data', 4));
     }
 
     public function test_role_can_be_created_with_valid_data(): void
@@ -70,7 +76,7 @@ class RoleControllerTest extends TestCase
         // Assert the role was created
         $response = $this->post(route('roles.store'), $data);
 
-        $response->assertRedirect();
+        $response->assertRedirect(route('roles.index'));
         $response->assertSessionHas('message', 'Role created successfully.');
         $response->assertSessionHas('type', 'success');
 
