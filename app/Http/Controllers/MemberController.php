@@ -62,7 +62,9 @@ class MemberController extends Controller
             'role_id' => 'required|exists:roles,id',
         ]));
 
-        $role = $member->organization->roles()->find($request->input('role_id'));
+        $organization = Organization::find(session('organization_id'));
+
+        $role = $organization->roles()->find($request->input('role_id'));
 
         $member->user->syncRoles($role->name);
 
