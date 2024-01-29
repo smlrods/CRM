@@ -10,6 +10,7 @@ use App\Models\Deal;
 use App\Models\Lead;
 use App\Models\Organization;
 use App\Models\OrganizationMember;
+use App\Policies\CompanyPolicy;
 use App\Policies\ContactPolicy;
 use App\Policies\DealPolicy;
 use App\Policies\LeadPolicy;
@@ -31,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         OrganizationMember::class => OrganizationMemberPolicy::class,
         Role::class => RolePolicy::class,
         Contact::class => ContactPolicy::class,
-        Company::class => ContactPolicy::class,
+        Company::class => CompanyPolicy::class,
         Lead::class => LeadPolicy::class,
         Deal::class => DealPolicy::class,
     ];
