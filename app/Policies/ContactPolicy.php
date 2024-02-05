@@ -38,7 +38,9 @@ class ContactPolicy
      */
     public function update(User $user, Contact $contact): bool
     {
-        return $user->can(ContactPermissions::UPDATE->value) && $user->organizations->contains($contact->organization_id);
+        $hasPermission = $user->can(ContactPermissions::UPDATE->value) && $user->organizations->contains($contact->organization_id);
+
+        return  $hasPermission;
     }
 
     /**
@@ -63,5 +65,17 @@ class ContactPolicy
     public function forceDelete(User $user, Contact $contact): bool
     {
         return false;
+    }
+
+    /**
+     * Perform pre-authorization checks on the model.
+    */
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->hasRole('owner')) {
+            return true;
+        }
+
+        return null; // see the note above in Gate::before about why null must be returned here.
     }
 }
