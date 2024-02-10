@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ContactDataResource;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
 use App\Models\Organization;
@@ -105,5 +106,25 @@ class ContactController extends Controller
         $contact->delete();
 
         return redirect()->back()->with(['message' => 'Contact deleted.', 'type' => 'success']);
+    }
+
+    public function getContactsOptions(Request $request)
+    {
+
+        $organization = Organization::find(session('organization_id'));
+
+        if ($request->input('query')) {
+            $contacts = Contact::search($request->input('query'))
+                ->orderBy('first_name')
+                ->orderBy('id')
+                ->take(10)
+                ->get();
+
+            return ContactDataResource::collection($contacts);
+        }
+
+        $contacts = $organization->contacts()->orderBy('first_name')->orderBy('id')->take(10)->get();
+
+        return ContactDataResource::collection($contacts);
     }
 }

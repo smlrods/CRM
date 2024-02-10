@@ -47,45 +47,6 @@ class LeadController extends Controller
         ]);
     }
 
-    public function getCompaniesOptions(Request $request)
-    {
-        $organization = Organization::find(session('organization_id'));
-
-        if ($request->input('query')) {
-            $companies = Company::search($request->input('query'))
-                ->orderBy('name')
-                ->orderBy('id')
-                ->take(10)
-                ->get();
-
-            return CompanyDataResource::collection($companies);
-        }
-
-        $companies = $organization->companies()->orderBy('name')->orderBy('id')->take(10)->get();
-
-        return CompanyDataResource::collection($companies);
-    }
-
-    public function getContactsOptions(Request $request)
-    {
-
-        $organization = Organization::find(session('organization_id'));
-
-        if ($request->input('query')) {
-            $companies = Contact::search($request->input('query'))
-                ->orderBy('first_name')
-                ->orderBy('id')
-                ->take(10)
-                ->get();
-
-            return ContactDataResource::collection($companies);
-        }
-
-        $companies = $organization->contacts()->orderBy('first_name')->orderBy('id')->take(10)->get();
-
-        return ContactDataResource::collection($companies);
-    }
-
     /**
      * Store a newly created resource in storage.
      */
