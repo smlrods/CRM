@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CompanyDataResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Address;
 use App\Models\Company;
@@ -136,5 +137,24 @@ class CompanyController extends Controller
         $company->delete();
 
         return back()->with(['message' => 'Company deleted successfully.', 'type' => 'success']);
+    }
+
+    public function getCompaniesOptions(Request $request)
+    {
+        $organization = Organization::find(session('organization_id'));
+
+        if ($request->input('query')) {
+            $companies = Company::search($request->input('query'))
+                ->orderBy('name')
+                ->orderBy('id')
+                ->take(10)
+                ->get();
+
+            return CompanyDataResource::collection($companies);
+        }
+
+        $companies = $organization->companies()->orderBy('name')->orderBy('id')->take(10)->get();
+
+        return CompanyDataResource::collection($companies);
     }
 }
