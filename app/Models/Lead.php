@@ -37,4 +37,13 @@ class Lead extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['company_name'] = $this->company->name;
+
+        return $array;
+    }
 }
