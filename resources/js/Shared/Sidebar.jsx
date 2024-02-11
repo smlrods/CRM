@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar as SidebarComponent, Dropdown } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
+import { HiArrowSmRight, HiChartPie, HiCog, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 import { Link } from '@inertiajs/react';
 
 const Sidebar = ({ sidebarOpen }) => {
@@ -24,6 +24,9 @@ const Sidebar = ({ sidebarOpen }) => {
                     <SidebarComponent.ItemGroup>
                         <SidebarComponent.Item as={Link} href={route('dashboard')} icon={HiChartPie}>
                             Dashboard
+                        </SidebarComponent.Item>
+                        <SidebarComponent.Item as={Link} href={route('roles.index')} icon={HiCog}>
+                            Roles
                         </SidebarComponent.Item>
                         <SidebarComponent.Item as={Link} href={route('members.index')} icon={HiViewBoards}>
                             Members
