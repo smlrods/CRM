@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CompanyDataResource;
-use App\Http\Resources\ContactDataResource;
+use App\Http\Resources\LeadDataResource;
 use App\Http\Resources\LeadResource;
-use App\Models\Company;
-use App\Models\Contact;
 use App\Models\Lead;
 use App\Models\Organization;
 use Illuminate\Http\Request;
@@ -99,5 +96,24 @@ class LeadController extends Controller
         $lead->delete();
 
         return back()->with(['message' => 'Lead deleted successfully', 'type' => 'success']);
+    }
+
+    public function getLeadsOptions(Request $request)
+    {
+
+        $organization = Organization::find(session('organization_id'));
+
+        if ($request->input('query')) {
+            $leads = Lead::search($request->input('query'))
+                ->orderBy('id')
+                ->take(10)
+                ->get();
+
+            return LeadDataResource::collection($leads);
+        }
+
+        $leads = $organization->leads()->orderBy('id')->take(10)->get();
+
+        return LeadDataResource::collection($leads);
     }
 }
