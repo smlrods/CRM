@@ -11,7 +11,7 @@ const CustomOption = (props) => (
     </components.Option>
 );
 
-const ComboBox = ({ onChange, apiUrlPath }) => {
+const ComboBox = ({ onChange, apiUrlPath, placeholder }) => {
     // console.log(options);
     const optionsExample = [
         { value: "chocolate", label: "Chocolate" },
@@ -25,7 +25,6 @@ const ComboBox = ({ onChange, apiUrlPath }) => {
             const response = await fetch(`${apiUrlPath}?query=${inputValue}`);
             const json = await response.json();
             const options = await json.data;
-            console.log(options);
 
             // Transform the data into the format expected by react-select
             // Call the callback with the options
@@ -59,7 +58,7 @@ const ComboBox = ({ onChange, apiUrlPath }) => {
             onChange={onChange}
             loadOptions={loadOptions}
             components={{ Option: CustomOption }}
-            placeholder="Search for options..."
+            placeholder={placeholder}
             styles={customStyles}
             menuPortalTarget={document.body}
         />
