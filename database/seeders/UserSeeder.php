@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Deal;
 use App\Models\Lead;
 use App\Models\Organization;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -27,6 +28,14 @@ class UserSeeder extends Seeder
         $organization = Organization::factory()->create(['user_id' => $owner->id]);
         $organization->memberships()->create(['user_id' => $owner->id]);
         $members = User::factory($numOfMembers)->create();
+
+        // create owner role
+        Role::create(['name' => 'owner', 'organization_id' => $organization->id]);
+
+        setPermissionsTeamId($organization->id);
+
+        // assign owner role to owner
+        $owner->assignRole('owner');
 
         // Create the organization members
         $organization->memberships()->createMany(
