@@ -44,7 +44,16 @@ const LeadForm = ({
                         { value: "other", label: "Other" },
                     ]}
                     placeholder="Source"
-                    defaultInputValue={data.source}
+                    defaultValue={
+                        data.source
+                            ? {
+                                  value: data.source,
+                                  label: capitalizeFirstLetter(
+                                      data.source ?? "",
+                                  ),
+                              }
+                            : null
+                    }
                     styles={{
                         menuPortal: (base) => ({ ...base, zIndex: 9999 }),
                     }}
@@ -60,7 +69,16 @@ const LeadForm = ({
                         { value: "converted", label: "Converted" },
                     ]}
                     placeholder="Status"
-                    defaultInputValue={data.status}
+                    defaultValue={
+                        data.status
+                            ? {
+                                  value: data.status,
+                                  label: capitalizeFirstLetter(
+                                      data.status ?? "",
+                                  ),
+                              }
+                            : null
+                    }
                     styles={{
                         menuPortal: (base) => ({ ...base, zIndex: 9999 }),
                     }}
@@ -68,7 +86,15 @@ const LeadForm = ({
                 />
             </div>
             <div className="w-full">
-                <Textarea onChange={(e) => setData('description', e.target.value)} id="description" placeholder="Description" required rows={4} color="blue" value={data.description} />
+                <Textarea
+                    onChange={(e) => setData("description", e.target.value)}
+                    id="description"
+                    placeholder="Description"
+                    required
+                    rows={4}
+                    color="blue"
+                    value={data.description}
+                />
             </div>
             <div>
                 <Button
