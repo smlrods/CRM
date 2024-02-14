@@ -1,8 +1,9 @@
 import Layout from "@/Shared/Layout";
+import DealsChart from "@/Shared/charts/DealsChart";
 import { Head, router, usePage } from "@inertiajs/react";
 import { Dropdown } from "flowbite-react";
 
-const Dashboard = () => {
+const Dashboard = ({ dealChartData, dealRange }) => {
     const { auth } = usePage().props;
 
     const handleOrganizationSelection = (organizationId) => {
@@ -30,6 +31,9 @@ const Dashboard = () => {
                     ))}
                 </Dropdown>
             </h1>
+            <div>
+                <DealsChart data={dealChartData} range={dealRange} />
+            </div>
         </>
     );
 };
