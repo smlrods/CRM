@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\LeadController;
@@ -30,13 +31,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'check_organitation'])->group(function () {
-    Route::get('/dashboard', function () {
-        $organizations = auth()->user()->memberships()->with('organization')->get();
-
-        return Inertia::render('Dashboard', [
-            'organizations' => $organizations,
-        ]);
-    })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::apiResource('organizations', OrganizationController::class)->withoutMiddleware('check_organitation');
 
