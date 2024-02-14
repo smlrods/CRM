@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
             <Alert />
             <Navbar toggleSidebar={toggleSidebar} />
             <Sidebar sidebarOpen={sidebarOpen} />
-            <div id="content" className="pt-20 sm:pl-20 pl-5 truncate">
+            <div id="content" className="pt-20 sm:pl-20 px-5 truncate">
                 {children}
             </div>
         </div>
