@@ -20,7 +20,7 @@ class DealFactory extends Factory
             'name' => fake()->words(2, true),
             'value' => fake()->numberBetween(1000, 100000),
             'currency' => fake()->randomElement(['USD', 'EUR', 'GBP']),
-            'close_date' => fake()->dateTimeBetween('-30 days', 'now')->format('Y-m-d'),
+            'close_date' => fake()->dateTimeBetween('-90 days', 'now')->format('Y-m-d'),
             'status' => fake()->randomElement([
                 "pending",
                 "won",
