@@ -41,6 +41,7 @@ class DashboardController extends Controller
 
         $totalValueRange = $organization->deals()
             ->where('close_date', '>=', $daysAgo)
+            ->where('status', 'won')
             ->sum('value');
 
         $dailyTotals = [];
@@ -48,6 +49,7 @@ class DashboardController extends Controller
         for ($data = $daysAgo->copy(); $data <= now(); $data->addDay()) {
             $dailyTotals[] = ['value' => $organization->deals()
                 ->where('close_date', $data->format('Y-m-d'))
+                ->where('status', 'won')
                 ->sum('value'), 'date' => $data->format('j F')];
         }
 
