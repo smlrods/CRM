@@ -18,7 +18,7 @@ class ActivityFactory extends Factory
     {
         return [
             'type' => fake()->randomElement(['call', 'email', 'meeting', 'other']),
-            'date' => fake()->dateTimeBetween('-1 year', 'now'),
+            'date' => fake()->dateTimeBetween('-90 days', 'now'),
             'time' => fake()->time(),
             'description' => fake()->text(),
         ];
