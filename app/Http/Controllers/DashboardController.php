@@ -21,12 +21,15 @@ class DashboardController extends Controller
 
         $dealChartRange = $request->input('deals-range', 7);
         $dealPieChartRange = $request->input('deals-pie-chart-range', 7);
+        $activityPieChartRange = $request->input('activities-pie-chart-range', 7);
 
         return Inertia::render('Dashboard', [
             'dealChartData' => fn() => $this->getChartDataDashboard($dealChartRange),
             'dealRange' => $dealChartRange,
             'dealPieChartData' => fn() => $this->getDealPieChartData($dealPieChartRange),
             'dealPieChartRange' => $dealPieChartRange,
+            'activityPieChartData' => fn() => $this->getActivityPieChartData($activityPieChartRange),
+            'activityPieChartRange' => $activityPieChartRange,
         ]);
     }
 
@@ -80,5 +83,23 @@ class DashboardController extends Controller
             ->pluck('total', 'status');
 
         return $numOfDealsByStatus->toArray();
+    }
+
+    protected function getActivityPieChartData(int $range): array
+    {
+        $organization = Organization::find(session('organization_id'));
+
+        $daysAgo = now()->subDays($range - 1);
+
+        $types = ['call', 'meeting', 'email', 'other'];
+
+        $numOfActivitiesByType = $organization->activities()
+            ->select('type', DB::raw('count(*) as total'))
+            ->where('date', '>=', $daysAgo)
+            ->whereIn('type', $types)
+            ->groupBy('type')
+            ->pluck('total', 'type');
+
+        return $numOfActivitiesByType->toArray();
     }
 }
