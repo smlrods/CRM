@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -19,10 +20,13 @@ class DashboardController extends Controller
         ]);
 
         $dealChartRange = $request->input('deals-range', 7);
+        $dealPieChartRange = $request->input('deals-pie-chart-range', 7);
 
         return Inertia::render('Dashboard', [
             'dealChartData' => fn() => $this->getChartDataDashboard($dealChartRange),
             'dealRange' => $dealChartRange,
+            'dealPieChartData' => fn() => $this->getDealPieChartData($dealPieChartRange),
+            'dealPieChartRange' => $dealPieChartRange,
         ]);
     }
 
@@ -58,5 +62,23 @@ class DashboardController extends Controller
             'dailyTotals' => $dailyTotals,
             'percentage' => $percentage,
         ];
+    }
+
+    protected function getDealPieChartData(int $range): array
+    {
+        $organization = Organization::find(session('organization_id'));
+
+        $daysAgo = now()->subDays($range - 1);
+
+        $statuses = ['pending', 'won', 'lost'];
+
+        $numOfDealsByStatus = $organization->deals()
+            ->select('status', DB::raw('count(*) as total'))
+            ->where('close_date', '>=', $daysAgo)
+            ->whereIn('status', $statuses)
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
+        return $numOfDealsByStatus->toArray();
     }
 }
