@@ -1,9 +1,18 @@
 import Layout from "@/Shared/Layout";
-import DealsChart from "@/Shared/charts/DealsChart";
+import ActivitiesPieChart from "@/Shared/charts/ActivitiesPieChart";
+import DealsAreaChart from "@/Shared/charts/DealsAreaChart";
+import DealsPieChart from "@/Shared/charts/DealsPieChart";
 import { Head, router, usePage } from "@inertiajs/react";
 import { Dropdown } from "flowbite-react";
 
-const Dashboard = ({ dealChartData, dealRange }) => {
+const Dashboard = ({
+    dealAreaChartData,
+    dealAreaChartRange,
+    dealPieChartData,
+    dealPieChartRange,
+    activityPieChartData,
+    activityPieChartRange,
+}) => {
     const { auth } = usePage().props;
 
     const handleOrganizationSelection = (organizationId) => {
@@ -31,8 +40,25 @@ const Dashboard = ({ dealChartData, dealRange }) => {
                     ))}
                 </Dropdown>
             </h1>
-            <div>
-                <DealsChart data={dealChartData} range={dealRange} />
+            <div className="space-y-5">
+                <DealsAreaChart
+                    data={dealAreaChartData}
+                    range={dealAreaChartRange}
+                />
+                <div className="grid sm:grid-cols-2 grid-cols-1 space-x-5">
+                    <div>
+                        <DealsPieChart
+                            data={dealPieChartData}
+                            range={dealPieChartRange}
+                        />
+                    </div>
+                    <div>
+                        <ActivitiesPieChart
+                            data={activityPieChartData}
+                            range={activityPieChartRange}
+                        />
+                    </div>
+                </div>
             </div>
         </>
     );
