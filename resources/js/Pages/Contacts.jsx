@@ -1,5 +1,4 @@
-import Layout from "@/Shared/Layout";
-import ResouceLayout from "@/Shared/ResourceLayout";
+import Layout from "@/Shared/Layout"; import ResouceLayout from "@/Shared/ResourceLayout";
 import TableActions from "@/Shared/TableActions";
 import TablePagination from "@/Shared/TablePagination";
 import { Button, Spinner, TextInput, Textarea } from "flowbite-react";
@@ -13,6 +12,7 @@ const ContactForm = ({
     onSubmit,
     processing,
     formData,
+    updating = false
 }) => {
     return (
         <form
@@ -113,7 +113,7 @@ const ContactForm = ({
                 >
                     {processing && <Spinner size="sm" />}
                     <span className={processing ? "ml-2" : ""}>
-                        {processing ? "Loading" : "Add Contact"}
+                        {processing ? "Loading" : updating ? "Update Contact" : "Add Contact"}
                     </span>
                 </Button>
             </div>

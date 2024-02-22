@@ -16,6 +16,7 @@ const LeadForm = ({
     onSubmit,
     processing,
     formData,
+    updating = false,
 }) => {
     return (
         <form
@@ -104,7 +105,7 @@ const LeadForm = ({
                 >
                     {processing && <Spinner size="sm" />}
                     <span className={processing ? "ml-2" : ""}>
-                        {processing ? "Loading" : "Add Lead"}
+                        {processing ? "Loading" : updating ? "Update Lead" : "Add Lead"}
                     </span>
                 </Button>
             </div>

@@ -13,6 +13,7 @@ const CompanyForm = ({
     onSubmit,
     processing,
     formData,
+    updating = false,
 }) => {
     return (
         <form
@@ -124,7 +125,11 @@ const CompanyForm = ({
                 >
                     {processing && <Spinner size="sm" />}
                     <span className={processing ? "ml-2" : ""}>
-                        {processing ? "Loading" : "Add Company"}
+                        {processing
+                            ? "Loading"
+                            : updating
+                              ? "Update Company"
+                              : "Add Company"}
                     </span>
                 </Button>
             </div>
@@ -152,14 +157,14 @@ const Companies = ({ pagination }) => {
                 ]}
             />
             <Table
-                data={pagination.data.map(company => {
+                data={pagination.data.map((company) => {
                     return {
                         ...company,
                         street_address: company.address.street_address,
                         city: company.address.city,
                         state: company.address.state,
                         zip_code: company.address.zip_code,
-                    }
+                    };
                 })}
                 columns={[
                     { header: "Name", key: "name" },
