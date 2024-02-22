@@ -70,6 +70,7 @@ function EditButton({
                         errors={errors}
                         onSubmit={submit}
                         processing={processing}
+                        updating={true}
                     />
                 </Modal.Body>
             </Modal>
