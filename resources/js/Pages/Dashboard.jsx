@@ -40,7 +40,7 @@ const Dashboard = ({
                     ))}
                 </Dropdown>
             </h1>
-            <div className="space-y-5">
+            <div className="space-y-5 mb-5">
                 <DealsAreaChart
                     data={dealAreaChartData}
                     range={dealAreaChartRange}
