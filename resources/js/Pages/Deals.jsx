@@ -14,7 +14,15 @@ import Table from "@/Shared/Table";
 import Select from "react-select";
 import ComboBox from "@/Shared/ComboBox";
 
-function DealForm({ formData, data, setData, errors, onSubmit, processing }) {
+function DealForm({
+    formData,
+    data,
+    setData,
+    errors,
+    onSubmit,
+    processing,
+    updating = false,
+}) {
     function toSqlDateFormat(date) {
         var year = date.getFullYear();
         var month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adds leading zero if needed
@@ -134,7 +142,11 @@ function DealForm({ formData, data, setData, errors, onSubmit, processing }) {
                 >
                     {processing && <Spinner size="sm" />}
                     <span className={processing ? "ml-2" : ""}>
-                        {processing ? "Loading" : "Update Role"}
+                        {processing
+                            ? "Loading"
+                            : updating
+                              ? "Update Deal"
+                              : "Add Deal"}
                     </span>
                 </Button>
             </div>

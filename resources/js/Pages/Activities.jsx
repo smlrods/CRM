@@ -2,7 +2,13 @@ import Layout from "@/Shared/Layout";
 import ResouceLayout from "@/Shared/ResourceLayout";
 import TableActions from "@/Shared/TableActions";
 import TablePagination from "@/Shared/TablePagination";
-import { Button, Datepicker, Spinner, TextInput, Textarea } from "flowbite-react";
+import {
+    Button,
+    Datepicker,
+    Spinner,
+    TextInput,
+    Textarea,
+} from "flowbite-react";
 import capitalizeFirstLetter from "@/Shared/utils/capitalizeFirstLetter";
 import Table from "@/Shared/Table";
 import Select from "react-select";
@@ -188,6 +194,7 @@ const ActivityForm = ({
     onSubmit,
     processing,
     formData,
+    updating = false,
 }) => {
     function toSqlDateFormat(date) {
         var year = date.getFullYear();
@@ -239,9 +246,7 @@ const ActivityForm = ({
                     onSelectedDateChanged={(date) =>
                         setData("date", toSqlDateFormat(date))
                     }
-                    defaultDate={
-                        data.date ? new Date(data.date) : new Date()
-                    }
+                    defaultDate={data.date ? new Date(data.date) : new Date()}
                     color={errors.date ? "failure" : null}
                     helperText={errors.date ?? null}
                 />
@@ -279,7 +284,11 @@ const ActivityForm = ({
                 >
                     {processing && <Spinner size="sm" />}
                     <span className={processing ? "ml-2" : ""}>
-                        {processing ? "Loading" : "Add Activity"}
+                        {processing
+                            ? "Loading"
+                            : updating
+                              ? "Update Activity"
+                              : "Add Activity"}
                     </span>
                 </Button>
             </div>
@@ -315,7 +324,14 @@ const Activities = ({ pagination }) => {
                 ]}
                 resourceName={"activities"}
                 EditResourceForm={ActivityForm}
-                resourceInfoKeys={["contact_id", "lead_id", "type", "date", "time", "description"]}
+                resourceInfoKeys={[
+                    "contact_id",
+                    "lead_id",
+                    "type",
+                    "date",
+                    "time",
+                    "description",
+                ]}
             />
             <TablePagination pagination={pagination.links} />
         </>
