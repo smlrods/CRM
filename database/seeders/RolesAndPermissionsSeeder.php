@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Enums\AddressPermissionsEnum;
-use App\Enums\ClientPermissionsEnum;
-use App\Enums\ProjectPermissionsEnum;
-use App\Enums\RolesEnum;
-use App\Enums\TaskPermissionsEnum;
-use App\Enums\UserPermissionsEnum;
+use App\Enums\ActivityPermissions;
+use App\Enums\CompanyPermissions;
+use App\Enums\ContactPermissions;
+use App\Enums\DealPermissions;
+use App\Enums\LeadPermissions;
+use App\Enums\MemberPermissions;
+use App\Enums\RolePermissions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -24,52 +25,32 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        foreach (ProjectPermissionsEnum::toArray() as $permission) {
+        foreach (RolePermissions::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
-        foreach (ClientPermissionsEnum::toArray() as $permission) {
+        foreach (MemberPermissions::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
-        foreach (AddressPermissionsEnum::toArray() as $permission) {
+        foreach (ContactPermissions::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
-        foreach (TaskPermissionsEnum::toArray() as $permission) {
+        foreach (CompanyPermissions::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
-        foreach (UserPermissionsEnum::toArray() as $permission) {
+        foreach (LeadPermissions::toArray() as $permission) {
             app(Permission::class)->findOrCreate($permission, 'web');
         }
 
-        // create roles and assign created permissions
+        foreach (DealPermissions::toArray() as $permission) {
+            app(Permission::class)->findOrCreate($permission, 'web');
+        }
 
-        $superAdministrator = app(Role::class)->findOrCreate(RolesEnum::SUPER->value, 'web');
-        $superAdministrator->givePermissionTo(Permission::all());
-
-        $administrator = app(Role::class)->findOrCreate(RolesEnum::ADMINISTRATOR->value, 'web');
-        $administrator->givePermissionTo(Permission::all());
-        $administrator->revokePermissionTo(UserPermissionsEnum::DELETE_ADMINISTRATORS);
-
-        $salesRepresentative = app(Role::class)->findOrCreate(RolesEnum::SALES->value, 'web');
-        $salesRepresentative->givePermissionTo(ProjectPermissionsEnum::toArray());
-        $salesRepresentative->givePermissionTo(TaskPermissionsEnum::toArray());
-        $salesRepresentative->givePermissionTo(ClientPermissionsEnum::toArray());
-        $salesRepresentative->givePermissionTo(AddressPermissionsEnum::toArray());
-
-        $customerSupport = app(Role::class)->findOrCreate(RolesEnum::SUPPORT->value, 'web');
-        $customerSupport->givePermissionTo(ProjectPermissionsEnum::READ_PROJECTS);
-        $customerSupport->givePermissionTo(TaskPermissionsEnum::READ_TASKS);
-
-        $marketingProfessional = app(Role::class)->findOrCreate(RolesEnum::MARKETING->value, 'web');
-        $marketingProfessional->givePermissionTo(ClientPermissionsEnum::READ_CLIENTS);
-
-        $analyst = app(Role::class)->findOrCreate(RolesEnum::ANALYST->value, 'web');
-        $analyst->givePermissionTo(ProjectPermissionsEnum::READ_PROJECTS);
-        $analyst->givePermissionTo(TaskPermissionsEnum::READ_TASKS);
-        $analyst->givePermissionTo(ClientPermissionsEnum::READ_CLIENTS);
-        $analyst->givePermissionTo(AddressPermissionsEnum::READ_ADDRESSES);
+        foreach (ActivityPermissions::toArray() as $permission) {
+            app(Permission::class)->findOrCreate($permission, 'web');
+        }
     }
 }

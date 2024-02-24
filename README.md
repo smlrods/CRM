@@ -124,15 +124,19 @@ Please refer to the `composer.json` file for a full list of PHP and Composer dep
 
 * **Tailwind CSS**: This is a utility-first CSS framework for rapidly building custom user interfaces.
 
-* **Flowbite**: Flowbite is a set of utility classes for Tailwind CSS that helps you build web interfaces faster.
+* **Flowbite React**: Flowbite is a set of utility classes for Tailwind CSS that helps you build web interfaces faster.
 
 * **PostCSS**: This is a tool for transforming CSS with JavaScript, and it is used in this project in conjunction with Tailwind CSS and Flowbite.
+
+* **ReactJS**: React is the library for web and native user interfaces. Build user interfaces out of individual pieces called components written in JavaScript.
+
+* **InertiaJS**: Inertia.js is a JavaScript tool that allows users to build modern single-page apps using classic server-side routing and controllers.
 
 Please refer to the `package.json` file for a full list of JavaScript and Node.js dependencies.
 
 ## Database Schema
 
-![Database Schema](./assets/db-schema.svg)
+[![Database Schema](./assets/db-schema.svg)](https://dbdiagram.io/d/NEW-CRM-6577200d56d8064ca0cd099a)
 
 ## **MVC Pattern**
 
