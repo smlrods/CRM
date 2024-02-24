@@ -27,7 +27,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return view('landing-page');
+    return Inertia::render('LandingPage');
 });
 
 Route::middleware(['auth', 'check_organitation'])->group(function () {
