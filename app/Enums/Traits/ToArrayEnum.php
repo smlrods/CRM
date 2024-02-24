@@ -7,7 +7,7 @@ trait ToArrayEnum {
     {
         $array = [];
         foreach (self::cases() as $case) {
-            $array[$case->name] = $case->value;
+            $array[] = $case->value;
         }
         return $array;
     }
