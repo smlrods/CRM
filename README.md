@@ -88,6 +88,12 @@ php artisan db:seed
 php artisan serve
 ```
 
+2. Start the Vite dev server:
+
+```sh
+npm run dev
+```
+
 2. The application will be available at `http://localhost:8000`
 
 ## **Project Structure**
@@ -150,6 +156,10 @@ The project includes unit and feature tests for the application logic. You can r
 
 ```sh
 cp .env.testing.example .env.testing
+```
+
+```sh
+npm run build
 ```
 
 ```sh
