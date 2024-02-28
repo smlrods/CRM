@@ -55,7 +55,7 @@ Route::middleware(['auth', 'check_organitation'])->group(function () {
 
     Route::controller(ContactController::class)->group(function () {
         Route::get('/contacts', 'index')->name('contacts.index');
-        Route::post('/contacts', 'index')->name('contacts.store');
+        Route::post('/contacts', 'store')->name('contacts.store');
         Route::put('/contacts/{contact}', 'update')->name('contacts.update');
         Route::delete('/contacts/{contact}', 'destroy')->name('contacts.destroy');
     });
