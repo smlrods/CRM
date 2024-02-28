@@ -2,6 +2,8 @@
 
 This is a Customer Relationship Management (CRM) application built using Laravel. It's designed to help businesses manage customer data, interactions, and more. This project serves as a practical application of Laravel's features and best practices, and was created to improve my Laravel skills.
 
+![](./public/images/dashboard_screen.png)
+
 ## **Table of Contents**
 
 * [Project Overview](#project-overview)

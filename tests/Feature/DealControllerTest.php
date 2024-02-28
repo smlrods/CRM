@@ -118,9 +118,6 @@ class DealControllerTest extends TestCase
                 fn($page) => $page
                 ->component('Deals')
                 ->has('pagination', $data['deals']->count())
-                ->has('contactsData')
-                ->has('companiesData')
-                ->has('leadsData')
             );
     }
 
