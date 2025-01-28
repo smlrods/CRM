@@ -1,5 +1,4 @@
-# Laravel CRM Project
-
+# NexusCRM
 This is a Customer Relationship Management (CRM) application built using Laravel. It's designed to help businesses manage customer data, interactions, and more. This project serves as a practical application of Laravel's features and best practices, and was created to improve my Laravel skills.
 
 ![](./public/images/dashboard_screen.png)
@@ -35,13 +34,13 @@ This Laravel project provides a foundation for building a CRM application. The p
 1. Clone the project repository:
 
 ```sh
-git clone https://github.com/smlrods/CRM.git
+git clone https://github.com/smlrods/NexusCRM.git
 ```
 
 2. Enter the project directory:
 
 ```sh
-cd CRM
+cd NexusCRM
 ```
 
 3. Install the Composer dependencies:
